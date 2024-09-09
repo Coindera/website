@@ -1,0 +1,17 @@
+#!/bin/bash
+
+sudo service httpd stop
+sudo yum erase -y httpd httpd-tools apr apr-util
+sudo yum remove -y php-*
+sudo yum install -y git zip httpd24 php70 mysql56-server php70-mysqlnd php70-mbstring mod24_ssl
+sudo service httpd start
+sudo chkconfig httpd on
+
+sudo getent group www || sudo groupadd www
+sudo usermod -a -G www ec2-user
+sudo chown -R root:www /var/www
+sudo chmod 2775 /var/www
+sudo find /var/www -type d -exec sudo chmod 2775 {} +
+sudo find /var/www -type f -print0 | sudo xargs -0 chmod 0664
+
+echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php

@@ -1,0 +1,21 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: php:7.1.1
+
+pipelines:
+  custom: # Pipelines that are triggered manually
+    manual-trigger:
+      - step:
+          script:
+            - apt-get update
+            - chmod 777 ./bin/aws-code-deploy.sh
+            - ./bin/aws-code-deploy.sh
+  default: # default auto 
+    - step:
+        script:
+          - apt-get update
+          - chmod 777 ./bin/aws-code-deploy.sh
+          - ./bin/aws-code-deploy.sh

@@ -1,0 +1,1 @@
+  <meta property="og:image" content="https://coindera.com/assets/img/features/block.png" />
